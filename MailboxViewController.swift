@@ -72,14 +72,16 @@ class MailboxViewController: UIViewController {
                 case "archive": UIView.animateWithDuration(0.3, delay: 0, options: [], animations: { () -> Void in
                         self.messageView.frame.origin.x = 320
                         self.iconArchiveView.frame.origin.x = 320-25-19
-                    }, completion: nil)
-                case "later": UIView.animateWithDuration(0.3, delay: 0, options: [], animations: { () -> Void in
-                    self.messageView.frame.origin.x = -320
                     }, completion: {(Bool) -> Void in
                         UIView.animateWithDuration(0.4, delay: 0, options: [], animations: { () -> Void in
-                                self.messageContainer.transform = CGAffineTransformMakeScale(1, 0)
+                            self.feedView.transform = CGAffineTransformMakeTranslation(0, -84)
+                            self.messageContainer.transform = CGAffineTransformMakeTranslation(0, -42)
+                            self.messageContainer.transform = CGAffineTransformScale(self.messageContainer.transform, 1, 0.00000000001)
                             }, completion: nil)
                 })
+                case "later": UIView.animateWithDuration(0.3, delay: 0, options: [], animations: { () -> Void in
+                    self.messageView.frame.origin.x = -320
+                    }, completion: nil)
                 case "delete": UIView.animateWithDuration(0.2, delay: 0, options: [], animations: { () -> Void in
                     self.messageView.frame.origin.x = 320
                     self.iconArchiveView.frame.origin.x = 320-25-19
