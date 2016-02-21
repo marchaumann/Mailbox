@@ -38,14 +38,24 @@ class MailboxViewController: UIViewController {
         } else if sender.state == UIGestureRecognizerState.Changed {
             iconArchiveView.alpha = convertValue(translation.x, r1Min: 0, r1Max: 60, r2Min: initialAlpha, r2Max: 1)
             iconLaterView.alpha = convertValue(translation.x, r1Min: 0, r1Max: -60, r2Min: initialAlpha, r2Max: 1)
-            if translation.x > 60 {
+            if 60 ... 250 ~= translation.x {
                 self.messageContainer.backgroundColor = UIColor.greenColor()
+                iconArchiveView.image = UIImage(named: "archive_icon")
             }
-            else if translation.x < -60 {
+            else if -250 ... -60 ~= translation.x {
                 self.messageContainer.backgroundColor = UIColor.yellowColor()
+                iconLaterView.image = UIImage(named: "later_icon")
+            }
+            else if translation.x > 250 {
+                self.messageContainer.backgroundColor = UIColor.redColor()
+                iconArchiveView.image = UIImage(named: "delete_icon")
+            }
+            else if translation.x < -250 {
+                self.messageContainer.backgroundColor = UIColor.brownColor()
+                iconLaterView.image = UIImage(named: "list_icon")
             }
             else {
-               self.messageContainer.backgroundColor = UIColor.grayColor()
+                self.messageContainer.backgroundColor = UIColor.grayColor()
             }
         } else if sender.state == UIGestureRecognizerState.Ended {
             
