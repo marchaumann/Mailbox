@@ -33,14 +33,33 @@
                                                 <rect key="frame" x="0.0" y="79" width="320" height="1202"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </imageView>
-                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="message" id="MbJ-9I-Hk3">
-                                                <rect key="frame" x="0.0" y="81" width="320" height="84"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                            </imageView>
                                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="help_label" id="uhf-Ov-g8z">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="37"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </imageView>
+                                            <view contentMode="scaleToFill" id="wel-7f-OXs">
+                                                <rect key="frame" x="0.0" y="81" width="320" height="84"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="later_icon" id="dPW-qM-MJL">
+                                                        <rect key="frame" x="271" y="30" width="25" height="25"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </imageView>
+                                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="archive_icon" id="B7Q-dv-aez">
+                                                        <rect key="frame" x="19" y="30" width="25" height="25"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </imageView>
+                                                    <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="message" id="MbJ-9I-Hk3">
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="84"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <gestureRecognizers/>
+                                                        <connections>
+                                                            <outletCollection property="gestureRecognizers" destination="NHW-ck-eOn" appends="YES" id="Ua2-NV-TKS"/>
+                                                        </connections>
+                                                    </imageView>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.8901960784313725" green="0.8901960784313725" blue="0.8901960784313725" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
                                         </subviews>
                                     </scrollView>
                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="nav" id="dOt-B0-Sym">
@@ -54,18 +73,29 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="iconArchiveView" destination="B7Q-dv-aez" id="LSg-0e-gnF"/>
+                        <outlet property="iconLaterView" destination="dPW-qM-MJL" id="4ZF-I5-ArR"/>
                         <outlet property="inboxView" destination="yeg-Tk-EJD" id="Upg-qr-bwf"/>
+                        <outlet property="messageContainer" destination="wel-7f-OXs" id="58d-90-fOK"/>
+                        <outlet property="messageView" destination="MbJ-9I-Hk3" id="XzN-ne-LK0"/>
                         <outlet property="scrollView" destination="nnZ-9o-vgA" id="K0y-UC-OZF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="NHW-ck-eOn">
+                    <connections>
+                        <action selector="messageDidPan:" destination="BYZ-38-t0r" id="m3E-DF-fZG"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="301" y="508"/>
         </scene>
     </scenes>
     <resources>
+        <image name="archive_icon" width="25" height="25"/>
         <image name="feed" width="320" height="1202"/>
         <image name="help_label" width="320" height="37"/>
+        <image name="later_icon" width="25" height="25"/>
         <image name="menu" width="320" height="568"/>
         <image name="message" width="320" height="86"/>
         <image name="nav" width="320" height="65"/>
