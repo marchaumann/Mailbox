@@ -25,12 +25,12 @@
                                         <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="search" id="mfL-fC-AZ3">
-                                                <rect key="frame" x="0.0" y="37" width="320" height="42"/>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="feed" id="Xgv-xY-lPq">
+                                                <rect key="frame" x="0.0" y="80" width="320" height="1202"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </imageView>
-                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="feed" id="Xgv-xY-lPq">
-                                                <rect key="frame" x="0.0" y="79" width="320" height="1202"/>
+                                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="search" id="mfL-fC-AZ3">
+                                                <rect key="frame" x="0.0" y="37" width="320" height="42"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </imageView>
                                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="help_label" id="uhf-Ov-g8z">
@@ -38,11 +38,11 @@
                                                 <autoresizingMask key="autoresizingMask"/>
                                             </imageView>
                                             <view contentMode="scaleToFill" id="wel-7f-OXs">
-                                                <rect key="frame" x="0.0" y="81" width="320" height="84"/>
+                                                <rect key="frame" x="0.0" y="80" width="320" height="86"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
                                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="later_icon" id="dPW-qM-MJL">
-                                                        <rect key="frame" x="271" y="30" width="25" height="25"/>
+                                                        <rect key="frame" x="278" y="30" width="25" height="25"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </imageView>
                                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="archive_icon" id="B7Q-dv-aez">
@@ -50,7 +50,7 @@
                                                         <autoresizingMask key="autoresizingMask"/>
                                                     </imageView>
                                                     <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="message" id="MbJ-9I-Hk3">
-                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="84"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="86"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <gestureRecognizers/>
                                                         <connections>
@@ -73,6 +73,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="feedView" destination="Xgv-xY-lPq" id="lQd-0q-04k"/>
                         <outlet property="iconArchiveView" destination="B7Q-dv-aez" id="LSg-0e-gnF"/>
                         <outlet property="iconLaterView" destination="dPW-qM-MJL" id="4ZF-I5-ArR"/>
                         <outlet property="inboxView" destination="yeg-Tk-EJD" id="Upg-qr-bwf"/>
