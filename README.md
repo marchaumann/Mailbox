@@ -28,7 +28,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://github.com/marchaumann/Dropbox/blob/master/dropbox.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://github.com/marchaumann/Mailbox/blob/master/mailbox.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with LICECap.
 
