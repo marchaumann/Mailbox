@@ -34,7 +34,7 @@ class MailboxViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        scrollView.contentSize = CGSize(width: 320, height: 1276)
+        scrollView.contentSize = CGSize(width: 320, height: 1313)
         snoozeView.alpha = 0
         listView.alpha = 0
         screenEdgeRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: "moveMenu:")
