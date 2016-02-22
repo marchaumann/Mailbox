@@ -24,6 +24,7 @@ class MailboxViewController: UIViewController {
     @IBOutlet weak var messageView: UIImageView!
     @IBOutlet weak var messageContainer: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
+    var screenEdgeRecognizer: UIScreenEdgePanGestureRecognizer!
     var messageState: String!
     var blue: UIColor! = UIColor(red: 81/255, green: 185/255, blue: 219/255, alpha: 1)
     var green: UIColor! = UIColor(red: 99/255, green: 218/255, blue: 98/255, alpha: 1)
@@ -33,15 +34,56 @@ class MailboxViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        scrollView.contentSize = CGSize(width: 320, height: 1202)
+        scrollView.contentSize = CGSize(width: 320, height: 1276)
         snoozeView.alpha = 0
         listView.alpha = 0
+        screenEdgeRecognizer = UIScreenEdgePanGestureRecognizer(target: self, action: "moveMenu:")
+        screenEdgeRecognizer.edges = .Left
+        view.addGestureRecognizer(screenEdgeRecognizer)
         // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func canBecomeFirstResponder() -> Bool {
+        return true
+    }
+    
+    override func motionEnded(motion: UIEventSubtype, withEvent event: UIEvent?) {
+        
+        if event?.subtype == UIEventSubtype.MotionShake{
+            UIView.animateWithDuration(0.4, delay: 0, options: [], animations: { () -> Void in
+                self.feedView.transform = CGAffineTransformMakeTranslation(0, 84)
+                self.messageContainer.frame.size.height = 84
+                self.messageView.frame.origin.x = 0
+                self.iconArchiveView.frame.origin.x = 19
+                self.iconLaterView.frame.origin.x = 278
+                }, completion: nil)
+        }
+    }
+    
+    func moveMenu(sender: UIScreenEdgePanGestureRecognizer) {
+        let translation = sender.translationInView(view)
+        let velocity = sender.velocityInView(view)
+        if sender.state == UIGestureRecognizerState.Began {
+//            print("began")
+        } else if sender.state == UIGestureRecognizerState.Changed {
+            self.viewsContainer.frame.origin.x = translation.x
+        } else if sender.state == UIGestureRecognizerState.Ended {
+//            print(velocity)
+            if velocity.x > 0 {
+                UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.2, options: [], animations: { () -> Void in
+                    self.viewsContainer.frame.origin.x = 290
+                    }, completion: nil)
+            } else if velocity.x < 0 {
+                UIView.animateWithDuration(0.2, delay: 0, options: [.CurveEaseOut], animations: { () -> Void in
+                    self.viewsContainer.frame.origin.x = 0
+                    }, completion: nil)
+            }
+        }
     }
     
     @IBAction func messageDidPan(sender: UIPanGestureRecognizer) {
@@ -58,26 +100,22 @@ class MailboxViewController: UIViewController {
                 iconArchiveView.image = UIImage(named: "archive_icon")
                 iconArchiveView.frame.origin.x = translation.x - 40
                 messageState = "archive"
-            }
-            else if -240 ... -60 ~= translation.x {
+            } else if -240 ... -60 ~= translation.x {
                 messageContainer.backgroundColor = yellow
                 iconLaterView.image = UIImage(named: "later_icon")
                 iconLaterView.frame.origin.x = translation.x + 340
                 messageState = "later"
-            }
-            else if translation.x > 240 {
+            } else if translation.x > 240 {
                 messageContainer.backgroundColor = red
                 iconArchiveView.image = UIImage(named: "delete_icon")
                 iconArchiveView.frame.origin.x = translation.x - 40
                 messageState = "delete"
-            }
-            else if translation.x < -240 {
+            } else if translation.x < -240 {
                 messageContainer.backgroundColor = brown
                 iconLaterView.image = UIImage(named: "list_icon")
                 iconLaterView.frame.origin.x = translation.x + 340
                 messageState = "list"
-            }
-            else {
+            } else {
                 messageContainer.backgroundColor = UIColor.grayColor()
                 messageState = "release"
             }
@@ -154,14 +192,12 @@ class MailboxViewController: UIViewController {
             UIView.animateWithDuration(0.3, delay: 0, options: [], animations: { () -> Void in
                 self.tabContainer.transform = CGAffineTransformMakeTranslation(320, 0)
                 }, completion: nil)
-        }
-        else if index == 1 {
+        } else if index == 1 {
             self.tabControl.tintColor = blue
             UIView.animateWithDuration(0.3, delay: 0, options: [], animations: { () -> Void in
                 self.tabContainer.transform = CGAffineTransformIdentity
                 }, completion: nil)
-        }
-        else if index == 2 {
+        } else if index == 2 {
             self.tabControl.tintColor = green
             UIView.animateWithDuration(0.3, delay: 0, options: [], animations: { () -> Void in
                 self.tabContainer.transform = CGAffineTransformMakeTranslation(-320, 0)
@@ -169,13 +205,14 @@ class MailboxViewController: UIViewController {
         }
     }
     @IBAction func menuDidTap(sender: AnyObject) {
-        UIView.animateWithDuration(0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.2, options: [], animations: { () -> Void in
-            if self.viewsContainer.frame.origin.x == 0 {
-                self.viewsContainer.transform = CGAffineTransformMakeTranslation(290, 0)
-            }
-            else {
-                self.viewsContainer.transform = CGAffineTransformIdentity
-            }
-            }, completion: nil)
+        if self.viewsContainer.frame.origin.x == 0 {
+            UIView.animateWithDuration(0.5, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.2, options: [], animations: { () -> Void in
+                self.viewsContainer.frame.origin.x = 290
+                }, completion: nil)
+        } else {
+            UIView.animateWithDuration(0.2, delay: 0, options: [.CurveEaseOut], animations: { () -> Void in
+                self.viewsContainer.frame.origin.x = 0
+                }, completion: nil)
+        }
     }
 }
